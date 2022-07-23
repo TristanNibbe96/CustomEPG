@@ -4,16 +4,13 @@ public class Season {
     ArrayList<Episode> episodes;
     int season_id;
     String season_title;
-    int season_number;
+    int index;
 
-    public Season(int season_id, String season_title) {
+    public Season(int season_id, String season_title, int index) {
         this.season_id = season_id;
         this.season_title = season_title;
         this.episodes = new ArrayList<>();
-    }
-
-    public void SetSeasonNumber(int season_number) {
-        this.season_number = season_number;
+        this.index = index;
     }
 
     public void AppendEpisode(Episode episode) {
@@ -21,7 +18,7 @@ public class Season {
     }
 
     public String ToString() {
-        StringBuilder string_val = new StringBuilder("Season " + this.season_number + ":");
+        StringBuilder string_val = new StringBuilder("Season " + this.index + ":");
 
         for(Episode episode : this.episodes) {
             string_val.append(episode.ToString());
@@ -31,7 +28,7 @@ public class Season {
     }
 
     public String ToXML() {
-        StringBuilder xml_val = new StringBuilder("\n\t<Season Number=\"" + this.season_number + "\" ID=\"" + this.season_id + "\">");
+        StringBuilder xml_val = new StringBuilder("\n\t<Season Number=\"" + this.index + "\" ID=\"" + this.season_id + "\">");
 
         for(Episode episode : this.episodes) {
             xml_val.append("\n\t\t").append(episode.ToXML());

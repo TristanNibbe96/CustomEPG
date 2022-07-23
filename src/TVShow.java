@@ -12,7 +12,6 @@ public class TVShow {
     }
 
     public void append_season(Season season) {
-        season.SetSeasonNumber(this.seasons.size() + 1);
         this.seasons.add(season);
     }
 

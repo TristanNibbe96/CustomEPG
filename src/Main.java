@@ -44,7 +44,7 @@ public class Main {
     public static void ExtractSeasonsFromDB(ArrayList<TVShow> shows) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:media.db");
         Statement stmt = conn.createStatement();
-        ResultSet cursor = stmt.executeQuery("SELECT id, metadata_type, parent_id, title"
+        ResultSet cursor = stmt.executeQuery("SELECT id, metadata_type, parent_id, title, [index]"
                 + " FROM metadata_items "
                 + " WHERE metadata_type = " + type_Season);
 
@@ -53,9 +53,10 @@ public class Main {
             int metadata_type = cursor.getInt("metadata_type");
             int parent_ID = cursor.getInt("parent_id");
             String title = cursor.getString("title");
+            int index = cursor.getInt("index");
 
             if(metadata_type == type_Season) {
-                Season new_season = new Season(entry_ID, title);
+                Season new_season = new Season(entry_ID, title, index);
                 for (TVShow show : shows) {
                     if(show.show_id == parent_ID){
                         show.append_season(new_season);
