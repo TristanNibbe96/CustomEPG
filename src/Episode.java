@@ -4,13 +4,15 @@ public class Episode {
     int ep_duration;
     int ep_index;
     String ep_summary;
+    int parent_ID;
 
-    public Episode(int ep_id, String ep_title, int duration, int index, String summary) {
+    public Episode(int ep_id, String ep_title, int duration, int index, String summary, int parent_ID) {
         this.ep_id = ep_id;
         this.ep_title = ep_title;
         this.ep_duration = duration;
         this.ep_index = index;
         this.ep_summary = summary;
+        this.parent_ID = parent_ID;
     }
 
     public String ToString() {
