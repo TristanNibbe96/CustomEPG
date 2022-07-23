@@ -38,7 +38,7 @@ public class TVShow {
     }
 
     public String ToXML() {
-        StringBuilder xml_val = new StringBuilder("\n<TVShow title=\"" + this.show_title + "\" ID=\"" + Integer.toString(this.show_id) + "\">");
+        StringBuilder xml_val = new StringBuilder("\n<TVShow title=\"" + this.show_title + "\" ID=\"" + this.show_id + "\">");
 
         for(Season season : this.seasons) {
             xml_val.append(season.ToXML());

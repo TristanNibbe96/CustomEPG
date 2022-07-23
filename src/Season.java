@@ -21,7 +21,7 @@ public class Season {
     }
 
     public String ToString() {
-        StringBuilder string_val = new StringBuilder("Season " + Integer.toString(this.season_number) + ":");
+        StringBuilder string_val = new StringBuilder("Season " + this.season_number + ":");
 
         for(Episode episode : this.episodes) {
             string_val.append(episode.ToString());
@@ -31,7 +31,7 @@ public class Season {
     }
 
     public String ToXML() {
-        StringBuilder xml_val = new StringBuilder("\n\t<Season Number=\"" + Integer.toString(this.season_number) + "\" ID=\"" + Integer.toString(this.season_id) + "\">");
+        StringBuilder xml_val = new StringBuilder("\n\t<Season Number=\"" + this.season_number + "\" ID=\"" + this.season_id + "\">");
 
         for(Episode episode : this.episodes) {
             xml_val.append("\n\t\t").append(episode.ToXML());

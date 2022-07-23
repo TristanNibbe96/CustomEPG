@@ -23,10 +23,10 @@ public class Episode {
 
     public String ToXML() {
         String xml_val = "<Episode title=\"" + this.ep_title
-            + "\" ID=\"" + Integer.toString(this.ep_id)
-            + "\" index=\"" + Integer.toString(this.ep_index)
+            + "\" ID=\"" + this.ep_id
+            + "\" index=\"" + this.ep_index
             + "\" summary=\"" + this.ep_summary
-            + "\" duration=\"" + Integer.toString(this.ep_duration) + "\">";
+            + "\" duration=\"" + this.ep_duration + "\">";
         xml_val += "</Episode>";
         return xml_val;
     }

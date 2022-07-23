@@ -15,7 +15,7 @@ public class Main {
         Statement stmt = conn.createStatement();
         ResultSet cursor = stmt.executeQuery("SELECT id, metadata_type, title"
                 + " FROM metadata_items "
-                + " WHERE metadata_type = 2");
+                + " WHERE metadata_type = " + type_Show);
 
         while(cursor.next()) {
             int entry_ID = cursor.getInt("id");
@@ -32,7 +32,7 @@ public class Main {
         stmt = conn.createStatement();
         cursor = stmt.executeQuery("SELECT id, metadata_type, parent_id, title"
                 + " FROM metadata_items "
-                + " WHERE metadata_type = 3");
+                + " WHERE metadata_type = " + type_Season);
 
         while(cursor.next()) {
             int entry_ID = cursor.getInt("id");
@@ -54,7 +54,7 @@ public class Main {
         stmt = conn.createStatement();
         cursor = stmt.executeQuery("SELECT id, metadata_type, parent_id, title, duration, [index]"
                 + " FROM metadata_items "
-                + " WHERE metadata_type = 4");
+                + " WHERE metadata_type = " + type_Episode);
 
             while(cursor.next()) {
                 int entry_ID = cursor.getInt("id");
