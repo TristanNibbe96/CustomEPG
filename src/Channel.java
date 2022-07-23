@@ -36,7 +36,7 @@ public class Channel {
         stringVal.append(this.ChannelName).append("|");
 
         int currentShow = GetRandomShow(-1);
-        int previousShow = -1;
+        int previousShow;
         int consecutiveEpisodes = 1;
 
         for(int i = 0; i < 50; i++){
