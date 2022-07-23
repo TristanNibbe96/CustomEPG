@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     static final int type_Show = 2;
@@ -8,14 +9,31 @@ public class Main {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        ArrayList<TVShow> shows = Main.ExtractShowsFromDB();
 
+        ArrayList<TVShow> shows = Main.ExtractShowsFromDB();
         Main.ExtractSeasonsFromDB(shows);
         Main.ExtractEpisodesFromDB(shows);
 
-        for(TVShow show : shows) {
-            System.out.print(show.ToXML());
+        Scanner sc = new Scanner(System.in);    //System.in is a standard input stream
+        String a = "";
+
+        Channel channel = new Channel("AdultSync");
+        ChannelShowEntry entry = new ChannelShowEntry(shows.get(0));
+        ChannelShowEntry entry1 = new ChannelShowEntry(shows.get(1));
+        //ChannelShowEntry entry2 = new ChannelShowEntry(shows.get(2));
+
+        channel.AddShow(entry);
+        channel.AddShow(entry1);
+        //channel.AddShow(entry2);
+
+        System.out.print(channel.PrintChannel());
+
+        /*
+        while(!a.equals("exit")){
+            System.out.print("Input: ");
+            a = sc.nextLine();
         }
+        */
     }
 
     public static ArrayList<TVShow> ExtractShowsFromDB() throws SQLException {
