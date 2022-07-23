@@ -7,7 +7,7 @@ public class Main {
     static final int type_Episode = 4;
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        ArrayList<TVShow> shows = new ArrayList<TVShow>();
+        ArrayList<TVShow> shows = new ArrayList<>();
         Class.forName("org.sqlite.JDBC");
         Connection conn = DriverManager.getConnection("jdbc:sqlite:media.db");
 
@@ -68,7 +68,9 @@ public class Main {
                 if(metadata_type == type_Episode) {
                     Episode new_episode = new Episode(entry_ID, title, duration, index, "summary", parent_ID);
                     for(TVShow show : shows){
-                        show.DoesEpisodeBelongInShow(new_episode);
+                        if(show.DoesEpisodeBelongInShow(new_episode)){
+                            break;
+                        }
                     }
                 }
             }

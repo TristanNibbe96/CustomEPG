@@ -8,7 +8,7 @@ public class TVShow {
     public TVShow(int show_id, String show_title) {
         this.show_id = show_id;
         this.show_title = show_title;
-        this.seasons = new ArrayList<Season>();
+        this.seasons = new ArrayList<>();
     }
 
     public void append_season(Season season) {

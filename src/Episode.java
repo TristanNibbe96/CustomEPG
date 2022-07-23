@@ -17,7 +17,7 @@ public class Episode {
 
     public String ToString() {
         String string_val = "";
-        string_val += Integer.toString(this.ep_id) + " " + this.ep_title;
+        string_val += this.ep_id + " " + this.ep_title;
         return string_val;
     }
 

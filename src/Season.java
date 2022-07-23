@@ -9,7 +9,7 @@ public class Season {
     public Season(int season_id, String season_title) {
         this.season_id = season_id;
         this.season_title = season_title;
-        this.episodes = new ArrayList<Episode>();
+        this.episodes = new ArrayList<>();
     }
 
     public void SetSeasonNumber(int season_number) {
