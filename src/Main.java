@@ -26,6 +26,7 @@ public class Main {
         channel.AddShow(entry1);
         //channel.AddShow(entry2);
 
+        channel.GenerateSchedule();
         System.out.print(channel.PrintChannel());
 
         /*

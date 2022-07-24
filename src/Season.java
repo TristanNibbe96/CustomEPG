@@ -13,6 +13,10 @@ public class Season {
         this.index = index;
     }
 
+    public int Size(){
+        return episodes.size();
+    }
+
     public void AppendEpisode(Episode episode) {
         this.episodes.add(episode);
     }
