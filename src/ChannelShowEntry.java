@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class ChannelShowEntry {
     int currentSeasonIndex;
@@ -13,14 +15,20 @@ public class ChannelShowEntry {
         seasonsToInclude = new ArrayList<>();
 
         for (int i = 0; i < show.seasons.size(); i++){
-            seasonsToInclude.add(i);
+            seasonsToInclude.add(show.seasons.get(i).index);
+            Collections.sort(seasonsToInclude);
         }
     }
 
     public int GetCurrentSeason(){
-        Season currSeason = show.seasons.get(seasonsToInclude.get(currentSeasonIndex));
+        try {
+            Season currSeason = show.GetSeasonFromNumber(seasonsToInclude.get(currentSeasonIndex));
+            return currSeason.index;
+        }catch (IndexOutOfBoundsException e){
+            System.out.print("s");
+        }
 
-        return currSeason.index;
+        return -1;
     }
 
     public Episode GetNextEpisode(){
@@ -33,7 +41,7 @@ public class ChannelShowEntry {
             currentEpisode = 0;
         }
 
-        if(currentSeasonIndex > seasonsToInclude.size()){
+        if(currentSeasonIndex >= seasonsToInclude.size()){
             currentSeasonIndex = 0;
         }
 

@@ -10,16 +10,16 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
 
-        ArrayList<TVShow> shows = Main.ExtractAllShowsFromDB();
-        Main.ExtractSeasonsFromDB(shows);
-        Main.ExtractEpisodesFromDB(shows);
-
         Scanner sc = new Scanner(System.in);
         String a = "";
 
         Channel channel = new Channel("AdultSync");
-        ChannelShowEntry entry = new ChannelShowEntry(shows.get(0));
-        ChannelShowEntry entry1 = new ChannelShowEntry(shows.get(1));
+
+        TVShow newShow  = Main.ExtractSpecificShowFromDB("Teenage Mutant Ninja Turtles");
+        TVShow newShow2  = Main.ExtractSpecificShowFromDB("Angel");
+
+        ChannelShowEntry entry = new ChannelShowEntry(newShow);
+        ChannelShowEntry entry1 = new ChannelShowEntry(newShow2);
 
         channel.AddShow(entry);
         channel.AddShow(entry1);
@@ -40,9 +40,9 @@ public class Main {
         Statement stmt = conn.createStatement();
         ResultSet cursor = stmt.executeQuery("SELECT id, metadata_type, title"
                 + " FROM metadata_items "
-                + " WHERE title = " + showTitle);
+                + " WHERE title = " + "\"" + showTitle + "\" AND metadata_type = " + type_Show);
 
-        return new TVShow(cursor.getInt("index"), showTitle);
+        return new TVShow(cursor.getInt("id"), showTitle);
     }
 
     public static void ExtractSeasonsFromDBToShow(TVShow show) throws SQLException {
@@ -68,7 +68,7 @@ public class Main {
             Statement stmt = conn.createStatement();
             ResultSet cursor = stmt.executeQuery("SELECT id, metadata_type, parent_id, title, duration, [index]"
                     + " FROM metadata_items "
-                    + " WHERE metadata_type = " + type_Episode);
+                    + " WHERE parent_id = " + season.season_id);
 
             while(cursor.next()) {
                 int entry_ID = cursor.getInt("id");
@@ -117,7 +117,7 @@ public class Main {
         return shows;
     }
 
-    public static void ExtractSeasonsFromDB(ArrayList<TVShow> shows) throws SQLException {
+    public static void ExtractAllSeasonsFromDB(ArrayList<TVShow> shows) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:media.db");
         Statement stmt = conn.createStatement();
         ResultSet cursor = stmt.executeQuery("SELECT id, metadata_type, parent_id, title, [index]"
@@ -143,7 +143,7 @@ public class Main {
         conn.close();
     }
 
-    public static void ExtractEpisodesFromDB(ArrayList<TVShow> shows) throws SQLException {
+    public static void ExtractAllEpisodesFromDB(ArrayList<TVShow> shows) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:media.db");
         Statement stmt = conn.createStatement();
         ResultSet cursor = stmt.executeQuery("SELECT id, metadata_type, parent_id, title, duration, [index]"

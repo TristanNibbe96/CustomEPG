@@ -25,6 +25,16 @@ public class TVShow {
         return string_val.toString();
     }
 
+    public Season GetSeasonFromNumber(int SeasonNum){
+        for(Season season : seasons){
+            if(season.index == SeasonNum){
+                return season;
+            }
+        }
+
+        return null;
+    }
+
     public boolean DoesEpisodeBelongInShow(Episode episode){
         for(Season season : this.seasons) {
             if(episode.parent_ID == season.season_id){
